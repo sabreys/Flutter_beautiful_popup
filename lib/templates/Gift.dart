@@ -6,10 +6,12 @@ import '../main.dart';
 /// ![](https://raw.githubusercontent.com/jaweii/Flutter_beautiful_popup/master/img/bg/gift.png)
 class TemplateGift extends BeautifulPopupTemplate {
   final BeautifulPopup options;
+
   TemplateGift(this.options) : super(options);
 
   @override
   final illustrationPath = 'img/bg/gift.png';
+
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xffFF2F49);
   @override
@@ -18,11 +20,12 @@ class TemplateGift extends BeautifulPopupTemplate {
   final maxHeight = 580;
   @override
   final bodyMargin = 30;
+
   @override
   BeautifulPopupButton get button {
     return ({
-      required String label,
-      required void Function() onPressed,
+      String label,
+      void Function() onPressed,
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),

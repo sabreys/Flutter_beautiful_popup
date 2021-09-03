@@ -4,8 +4,8 @@ import 'dart:ui' as ui;
 import 'package:auto_size_text/auto_size_text.dart';
 
 typedef Widget BeautifulPopupButton({
-  required String label,
-  required void Function() onPressed,
+  String label,
+  void Function() onPressed,
   TextStyle labelStyle,
   bool outline,
   bool flat,
@@ -14,6 +14,7 @@ typedef Widget BeautifulPopupButton({
 /// You can extend this class to custom your own template.
 abstract class BeautifulPopupTemplate extends StatefulWidget {
   final BeautifulPopup options;
+
   BeautifulPopupTemplate(this.options);
 
   final State<StatefulWidget> state = BeautifulPopupTemplateState();
@@ -43,16 +44,21 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
   }
 
   double get width => size.width;
+
   double get height => size.height;
 
   double get maxWidth;
+
   double get maxHeight;
+
   double get bodyMargin;
 
   /// The path of the illustration asset.
   String get illustrationPath => '';
+
   String get illustrationKey =>
       'packages/flutter_beautiful_popup/$illustrationPath';
+
   Color get primaryColor;
 
   double percentW(double n) {
@@ -137,7 +143,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         : options.content;
   }
 
-  Widget? get actions {
+  Widget get actions {
     final actionsList = options.actions;
     if (actionsList == null || actionsList.length == 0) return null;
     return Flex(
@@ -161,8 +167,8 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 
   BeautifulPopupButton get button {
     return ({
-      required String label,
-      required void Function() onPressed,
+      String label,
+      void Function() onPressed,
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),
@@ -217,7 +223,8 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 }
 
 class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
-  OverlayEntry? closeEntry;
+  OverlayEntry closeEntry;
+
   @override
   void initState() {
     super.initState();
@@ -283,8 +290,9 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
 
 class ImageEditor extends CustomPainter {
   ui.Image image;
+
   ImageEditor({
-    required this.image,
+    this.image,
   });
 
   @override

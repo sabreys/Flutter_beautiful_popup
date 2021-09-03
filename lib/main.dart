@@ -42,12 +42,15 @@ export 'templates/RedPacket.dart';
 
 class BeautifulPopup {
   BuildContext _context;
+
   BuildContext get context => _context;
 
-  Type? _template;
-  Type? get template => _template;
+  Type _template;
 
-  BeautifulPopupTemplate Function(BeautifulPopup options)? _build;
+  Type get template => _template;
+
+  BeautifulPopupTemplate Function(BeautifulPopup options) _build;
+
   BeautifulPopupTemplate get instance {
     final build = _build;
     if (build != null) return build(this);
@@ -86,28 +89,29 @@ class BeautifulPopup {
     }
   }
 
-  ui.Image? _illustration;
-  ui.Image? get illustration => _illustration;
+  ui.Image _illustration;
+
+  ui.Image get illustration => _illustration;
 
   dynamic title = '';
   dynamic content = '';
-  List<Widget>? actions;
-  Widget? close;
-  bool? barrierDismissible;
+  List<Widget> actions;
+  Widget close;
+  bool barrierDismissible;
 
-  Color? primaryColor;
+  Color primaryColor;
 
   BeautifulPopup({
-    required BuildContext context,
-    required Type? template,
-  })   : _context = context,
+    BuildContext context,
+    Type template,
+  })  : _context = context,
         _template = template {
     primaryColor = instance.primaryColor; // Get the default primary color.
   }
 
   static BeautifulPopup customize({
-    required BuildContext context,
-    required BeautifulPopupTemplate Function(BeautifulPopup options) build,
+    BuildContext context,
+    BeautifulPopupTemplate Function(BeautifulPopup options) build,
   }) {
     final popup = BeautifulPopup(
       context: context,
@@ -123,7 +127,7 @@ class BeautifulPopup {
     this.primaryColor = color;
     final illustrationData = await rootBundle.load(instance.illustrationKey);
     final buffer = illustrationData.buffer.asUint8List();
-    img.Image? asset;
+    img.Image asset;
     asset = img.readPng(buffer);
     if (asset != null) {
       img.adjustColor(
@@ -158,12 +162,12 @@ class BeautifulPopup {
   /// `barrierDismissible`: Determine whether this dialog can be dismissed. Default to `False`.
   ///
   /// `close`: Close widget.
-  Future<T?> show<T>({
+  Future<T> show<T>({
     dynamic title,
     dynamic content,
-    List<Widget>? actions,
+    List<Widget> actions,
     bool barrierDismissible = false,
-    Widget? close,
+    Widget close,
   }) {
     this.title = title;
     this.content = content;

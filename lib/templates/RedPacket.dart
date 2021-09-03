@@ -7,10 +7,12 @@ import 'Common.dart';
 /// ![](https://raw.githubusercontent.com/jaweii/Flutter_beautiful_popup/master/img/bg/red_packet.png)
 class TemplateRedPacket extends BeautifulPopupTemplate {
   final BeautifulPopup options;
+
   TemplateRedPacket(this.options) : super(options);
 
   @override
   final illustrationPath = 'img/bg/red_packet.png';
+
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xfffa1a2c);
   @override
@@ -19,6 +21,7 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
   final maxHeight = 620;
   @override
   final bodyMargin = 0;
+
   @override
   Widget get title {
     if (options.title is Widget) {
@@ -65,8 +68,8 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
   @override
   BeautifulPopupButton get button {
     return ({
-      required String label,
-      required void Function() onPressed,
+      String label,
+      void Function() onPressed,
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),

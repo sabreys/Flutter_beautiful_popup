@@ -7,10 +7,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 /// ![](https://raw.githubusercontent.com/jaweii/Flutter_beautiful_popup/master/img/bg/thumb.png)
 class TemplateThumb extends BeautifulPopupTemplate {
   final BeautifulPopup options;
+
   TemplateThumb(this.options) : super(options);
 
   @override
   final illustrationPath = 'img/bg/thumb.png';
+
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xfffb675d);
   @override
@@ -49,8 +51,8 @@ class TemplateThumb extends BeautifulPopupTemplate {
   @override
   BeautifulPopupButton get button {
     return ({
-      required String label,
-      required void Function() onPressed,
+      String label,
+      void Function() onPressed,
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),
