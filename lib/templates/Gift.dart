@@ -24,25 +24,25 @@ class TemplateGift extends BeautifulPopupTemplate {
   @override
   BeautifulPopupButton get button {
     return ({
-      String label,
-      void Function() onPressed,
-      bool outline = false,
-      bool flat = false,
-      TextStyle labelStyle = const TextStyle(),
+      String? label,
+      void Function()? onPressed,
+      bool? outline = false,
+      bool? flat = false,
+      TextStyle? labelStyle = const TextStyle(),
     }) {
       final gradient = LinearGradient(colors: [
         primaryColor.withOpacity(0.5),
         primaryColor,
       ]);
-      final double elevation = (outline || flat) ? 0 : 2;
+      final double elevation = (outline! || flat!) ? 0 : 2;
       final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+          (outline || flat!) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
-        gradient: (outline || flat) ? null : gradient,
+        gradient: (outline || flat!) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
         border: Border.all(
           color: outline ? primaryColor : Colors.transparent,
-          width: (outline && !flat) ? 1 : 0,
+          width: (outline && !flat!) ? 1 : 0,
         ),
       );
       final minHeight = 40.0 - (outline ? 4 : 0);
@@ -60,7 +60,7 @@ class TemplateGift extends BeautifulPopupTemplate {
             ),
             alignment: Alignment.center,
             child: Text(
-              label,
+              label!,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.95),
                 fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class TemplateGift extends BeautifulPopupTemplate {
         left: percentW(5),
         right: percentW(5),
         height: percentH(actions == null ? 60 : 50),
-        child: content,
+        child: content!,
       ),
       Positioned(
         bottom: percentW(5),

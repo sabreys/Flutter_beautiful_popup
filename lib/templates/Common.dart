@@ -4,11 +4,11 @@ import 'dart:ui' as ui;
 import 'package:auto_size_text/auto_size_text.dart';
 
 typedef Widget BeautifulPopupButton({
-  String label,
-  void Function() onPressed,
-  TextStyle labelStyle,
-  bool outline,
-  bool flat,
+  String? label,
+  void Function()? onPressed,
+  TextStyle? labelStyle,
+  bool? outline,
+  bool? flat,
 });
 
 /// You can extend this class to custom your own template.
@@ -23,8 +23,8 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
   State<StatefulWidget> createState() => state;
 
   Size get size {
-    double screenWidth = MediaQuery.of(options.context).size.width;
-    double screenHeight = MediaQuery.of(options.context).size.height;
+    double screenWidth = MediaQuery.of(options.context!).size.width;
+    double screenHeight = MediaQuery.of(options.context!).size.height;
     double height = screenHeight > maxHeight ? maxHeight : screenHeight;
     double width;
     height = height - bodyMargin * 2;
@@ -81,7 +81,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         child: Icon(Icons.close, color: Colors.white70, size: 26),
       ),
       padding: EdgeInsets.all(0),
-      onPressed: Navigator.of(options.context).pop,
+      onPressed: Navigator.of(options.context!).pop,
     );
   }
 
@@ -121,7 +121,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
           options.title,
           maxLines: 1,
           style: TextStyle(
-            fontSize: Theme.of(options.context).textTheme.display1?.fontSize,
+            fontSize: Theme.of(options.context!).textTheme.headline4!.fontSize,
             color: primaryColor,
             fontWeight: FontWeight.bold,
           ),
@@ -130,12 +130,12 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
     );
   }
 
-  Widget get content {
+  Widget? get content {
     return options.content is String
         ? AutoSizeText(
             options.content,
             minFontSize:
-                Theme.of(options.context).textTheme.subhead?.fontSize ?? 12,
+                Theme.of(options.context!).textTheme.titleSmall!.fontSize ?? 12,
             style: TextStyle(
               color: Colors.black87,
             ),
@@ -143,7 +143,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         : options.content;
   }
 
-  Widget get actions {
+  Widget? get actions {
     final actionsList = options.actions;
     if (actionsList == null || actionsList.length == 0) return null;
     return Flex(
@@ -167,25 +167,25 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 
   BeautifulPopupButton get button {
     return ({
-      String label,
-      void Function() onPressed,
-      bool outline = false,
-      bool flat = false,
-      TextStyle labelStyle = const TextStyle(),
+      String? label,
+      void Function()? onPressed,
+      bool? outline = false,
+      bool? flat = false,
+      TextStyle? labelStyle = const TextStyle(),
     }) {
       final gradient = LinearGradient(colors: [
         primaryColor.withOpacity(0.5),
         primaryColor,
       ]);
-      final double elevation = (outline || flat) ? 0 : 2;
+      final double elevation = (outline! || flat!) ? 0 : 2;
       final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+          (outline || flat!) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
-        gradient: (outline || flat) ? null : gradient,
+        gradient: (outline || flat!) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
         border: Border.all(
           color: outline ? primaryColor : Colors.transparent,
-          width: (outline && !flat) ? 1 : 0,
+          width: (outline && !flat!) ? 1 : 0,
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
@@ -203,7 +203,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              label,
+              label!,
               style: TextStyle(
                 color: labelColor,
               ).merge(labelStyle),
@@ -223,7 +223,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 }
 
 class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
-  OverlayEntry closeEntry;
+  OverlayEntry? closeEntry;
 
   @override
   void initState() {
@@ -289,7 +289,7 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
 }
 
 class ImageEditor extends CustomPainter {
-  ui.Image image;
+  ui.Image? image;
 
   ImageEditor({
     this.image,
@@ -298,8 +298,8 @@ class ImageEditor extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawImageRect(
-      image,
-      Rect.fromLTRB(0, 0, image.width.toDouble(), image.height.toDouble()),
+      image!,
+      Rect.fromLTRB(0, 0, image!.width.toDouble(), image!.height.toDouble()),
       Rect.fromLTRB(0, 0, size.width, size.height),
       new Paint(),
     );

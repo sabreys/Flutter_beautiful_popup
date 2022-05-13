@@ -41,15 +41,15 @@ export 'templates/Term.dart';
 export 'templates/RedPacket.dart';
 
 class BeautifulPopup {
-  BuildContext _context;
+  BuildContext? _context;
 
-  BuildContext get context => _context;
+  BuildContext? get context => _context;
 
-  Type _template;
+  Type? _template;
 
-  Type get template => _template;
+  Type? get template => _template;
 
-  BeautifulPopupTemplate Function(BeautifulPopup options) _build;
+  BeautifulPopupTemplate Function(BeautifulPopup options)? _build;
 
   BeautifulPopupTemplate get instance {
     final build = _build;
@@ -89,29 +89,29 @@ class BeautifulPopup {
     }
   }
 
-  ui.Image _illustration;
+  ui.Image? _illustration;
 
-  ui.Image get illustration => _illustration;
+  ui.Image? get illustration => _illustration;
 
   dynamic title = '';
   dynamic content = '';
-  List<Widget> actions;
-  Widget close;
-  bool barrierDismissible;
+  List<Widget>? actions;
+  Widget? close;
+  bool? barrierDismissible;
 
-  Color primaryColor;
+  Color? primaryColor;
 
   BeautifulPopup({
-    BuildContext context,
-    Type template,
+    BuildContext? context,
+    Type? template,
   })  : _context = context,
         _template = template {
     primaryColor = instance.primaryColor; // Get the default primary color.
   }
 
   static BeautifulPopup customize({
-    BuildContext context,
-    BeautifulPopupTemplate Function(BeautifulPopup options) build,
+    BuildContext? context,
+    BeautifulPopupTemplate Function(BeautifulPopup options)? build,
   }) {
     final popup = BeautifulPopup(
       context: context,
@@ -127,7 +127,7 @@ class BeautifulPopup {
     this.primaryColor = color;
     final illustrationData = await rootBundle.load(instance.illustrationKey);
     final buffer = illustrationData.buffer.asUint8List();
-    img.Image asset;
+    img.Image? asset;
     asset = img.readPng(buffer);
     if (asset != null) {
       img.adjustColor(
@@ -144,8 +144,8 @@ class BeautifulPopup {
         alpha: 0,
       );
     }
-    final paint = await PaintingBinding.instance?.instantiateImageCodec(
-        asset != null ? Uint8List.fromList(img.encodePng(asset)) : buffer);
+    final paint = (await PaintingBinding.instance?.instantiateImageCodec(
+        asset != null ? Uint8List.fromList(img.encodePng(asset)) : buffer))!;
     final nextFrame = await paint?.getNextFrame();
     _illustration = nextFrame?.image;
     return this;
@@ -162,12 +162,12 @@ class BeautifulPopup {
   /// `barrierDismissible`: Determine whether this dialog can be dismissed. Default to `False`.
   ///
   /// `close`: Close widget.
-  Future<T> show<T>({
+  Future<T?> show<T>({
     dynamic title,
     dynamic content,
-    List<Widget> actions,
+    List<Widget>? actions,
     bool barrierDismissible = false,
-    Widget close,
+    Widget? close,
   }) {
     this.title = title;
     this.content = content;
@@ -184,7 +184,7 @@ class BeautifulPopup {
       barrierColor: Colors.black38,
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierDismissible ? 'beautiful_popup' : null,
-      context: context,
+      context: context!,
       pageBuilder: (context, animation1, animation2) {
         return child;
       },
